@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    tester.sh                                          :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ael-bekk <ael-bekk <ael-bekk@student.13    +#+  +:+       +#+         #
+#    By: nsmitsom <nsmitsom@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 14:44:38 by ael-bekk          #+#    #+#              #
-#    Updated: 2022/02/17 16:10:43 by ael-bekk         ###   ########.fr        #
+#    Updated: 2022/10/24 17:11:33 by nsmitsom         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,27 +39,27 @@ s6="╚═╝     ╚═╝╚═╝     ╚══════╝╚═╝  ╚�
 for (( i=0; i<${#s1}; i++ )); do
   printf "%s" "${s1:$i:1}"
 done
-echo ""
+echo -e ""
 for (( i=0; i<${#s2}; i++ )); do
   printf "%s" "${s2:$i:1}"
 done
-echo ""
+echo -e ""
 for (( i=0; i<${#s3}; i++ )); do
   printf "%s" "${s3:$i:1}"
 done
-echo ""
+echo -e ""
 for (( i=0; i<${#s4}; i++ )); do
   printf "%s" "${s4:$i:1}"
 done
-echo ""
+echo -e ""
 for (( i=0; i<${#s5}; i++ )); do
   printf "%s" "${s5:$i:1}"
 done
-echo ""
+echo -e ""
 for (( i=0; i<${#s6}; i++ )); do
   printf "%s" "${s6:$i:1}"
 done
-echo ""
+echo -e ""
 printf "\n$l1$RESET\n"
 sleep 1
 printf "                                 Tester is ready!"
@@ -69,23 +69,23 @@ if [ $# -eq 1 ]
 then
     mines="$1"
     firstCharacter=${mines::1}
-    all_clear=`echo $1 | sed "s/e//g" | sed "s/m//g" | sed "s/p//g" | sed "s/h//g" | sed "s/a//g"`
-    err=`echo $1 | grep e`
-    mult=`echo $1 | grep m`
-    pip=`echo $1 | grep p`
-    herd=`echo $1 | grep h`
-    all=`echo $1 | grep a`
+    all_clear=`echo -e $1 | sed "s/e//g" | sed "s/m//g" | sed "s/p//g" | sed "s/h//g" | sed "s/a//g"`
+    err=`echo -e $1 | grep e`
+    mult=`echo -e $1 | grep m`
+    pip=`echo -e $1 | grep p`
+    herd=`echo -e $1 | grep h`
+    all=`echo -e $1 | grep a`
     
     if [ "$err" != "" ] || [ "$mult" != "" ] || [ "$pip" != "" ] || [ "$herd" != "" ] || [ "$all" != "" ]
     then
-        all_clear=`echo $all_clear | sed "s/-//g"`
+        all_clear=`echo -e $all_clear | sed "s/-//g"`
     fi
     
     
     if [ "$all_clear" != "" ] || [ "$firstCharacter" != "-" ]
     then
-        echo $GREEN"usage: ./tester.sh [-aemph] [-a all_tests]"
-        echo  "                   [-e error_handling_tests] [-m multi_pipe_tests] [-p one_pipe_tests] [-h here_doc_tests]$RESET\n" >&2 ; exit
+        echo -e $GREEN"usage: ./tester.sh [-aemph] [-a all_tests]"
+        echo -e  "                   [-e error_handling_tests] [-m multi_pipe_tests] [-p one_pipe_tests] [-h here_doc_tests]$RESET\n" >&2 ; exit
     fi
  
     if [ "$err" != "" ] || [ "$all" != "" ]
