@@ -6,7 +6,7 @@
 #    By: nsmitsom <nsmitsom@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 14:44:49 by ael-bekk          #+#    #+#              #
-#    Updated: 2022/10/24 17:11:24 by nsmitsom         ###   ########.fr        #
+#    Updated: 2022/10/25 12:58:03 by nsmitsom         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ timeout() {
 
 timeout2() {
     ( $1 "$2" "$3" "$4" "$5" 2> /dev/null ) & pid=$!
-    ( sleep 10 && kill -HUP $pid ) 2>/dev/null & watcher=$!
+    ( sleep 12 && kill -HUP $pid ) 2>/dev/null & watcher=$!
     if wait $pid 2>/dev/null; then
         status="finished"
         pkill -HUP -P $watcher
@@ -129,11 +129,11 @@ echo -e "${PURPLE}==============>Test 6${RESET}"
 printf "${WHITE}\tsleep 9 | sleep 4                                               : ${RESET}"
 SECONDS=0;
 timeout2 "$1" "in_file" "sleep 9" "sleep 4" "outfile"
-if [ "$status" = "finished" ] && [ "$SECONDS" -eq "9" ]
+if [ "$status" = "finished" ] && [ "$SECONDS" -ge "9" ] && [ "$SECONDS" -le "10" ]
     then
     echo -e "${GREEN}[OK]${RESET}\n"
 else
-    echo -e "${RED}[KO]${RESET}\n"
+    echo -e "${RED}[KO]${RESET}\n" "$SECONDS"
 fi
 sleep 0.7
 

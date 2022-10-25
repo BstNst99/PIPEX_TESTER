@@ -6,7 +6,7 @@
 #    By: nsmitsom <nsmitsom@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/17 14:45:14 by ael-bekk          #+#    #+#              #
-#    Updated: 2022/10/24 17:11:24 by nsmitsom         ###   ########.fr        #
+#    Updated: 2022/10/25 12:19:34 by nsmitsom         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,7 @@ echo -e "sgfefeqd qwdqwdddafasd s+64 65 30 9 2 92 ad asd lim asd as d asd\n asda
 
 	timeout2() {
 	    ( < in_file $1 "$2" "$3" "$4" "$5" "$6" 2> my_error ) 1> /dev/null & pid=$!
-	    ( sleep 10 && kill -HUP $pid ) 2>/dev/null & watcher=$!
+	    ( sleep 12 && kill -HUP $pid ) 2>/dev/null & watcher=$!
 	    if wait $pid 2>/dev/null; then
 	        status="finished"
 	        pkill -HUP -P $watcher

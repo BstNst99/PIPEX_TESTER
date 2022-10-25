@@ -6,7 +6,7 @@
 #    By: nsmitsom <nsmitsom@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/17 11:22:13 by ael-bekk          #+#    #+#              #
-#    Updated: 2022/10/25 11:14:35 by nsmitsom         ###   ########.fr        #
+#    Updated: 2022/10/25 12:58:03 by nsmitsom         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,7 @@ echo -e "sgfefeqd qwdqwdddafasd s+64 65 30 9 2 92 ad asd lim asd as d asd\n asda
 
 	timeout2() {
 	    ( $1 "$2" "$3" "$4" "$5" 2> my_error ) & pid=$!
-	    ( sleep 10 && kill -HUP $pid ) 2>/dev/null & watcher=$!
+	    ( sleep 12 && kill -HUP $pid ) 2>/dev/null & watcher=$!
 	    if wait $pid 2>/dev/null; then
         	status_code=$?
 	        status="finished"
@@ -99,7 +99,7 @@ echo -e "sgfefeqd qwdqwdddafasd s+64 65 30 9 2 92 ad asd lim asd as d asd\n asda
 
 	timeout2_1() {
 	    ( $1 "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9" 2> my_error ) & pid=$!
-	    ( sleep 10 && kill -HUP $pid ) 2>/dev/null & watcher=$!
+	    ( sleep 12 && kill -HUP $pid ) 2>/dev/null & watcher=$!
 	    if wait $pid 2>/dev/null; then
         	status_code=$?
 	        status="finished"
@@ -177,7 +177,7 @@ sleep 0.7
 	SECONDS=0;
 	timeout2_1 "$1" "in_fiasfle" "sleep 12" "sleep 7" "sleep 8" "sleep 4" "sleep 5" "sleep 2" "outfile"
 	find_smae_err=`cat my_error | grep -a "no such file or directory\|No such file or directory" | wc -l`
-	if [ "$status" = "finished" ] && [ "$SECONDS" -eq "8" ] && [ "$find_smae_err" -eq "1" ]
+	if [ "$status" = "finished" ] && [ "$SECONDS" -ge "8" ] && [ "$SECONDS" -le "9" ] && [ "$find_smae_err" -eq "1" ]
 	    then
 	    echo -e "${GREEN}[OK]${RESET}\n"
 	else

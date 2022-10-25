@@ -6,7 +6,7 @@
 #    By: nsmitsom <nsmitsom@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 14:44:54 by ael-bekk          #+#    #+#              #
-#    Updated: 2022/10/24 17:11:24 by nsmitsom         ###   ########.fr        #
+#    Updated: 2022/10/25 12:58:03 by nsmitsom         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,7 +79,7 @@ echo -e "sgfefeqd qwdqwdddafasd s+64 65 30 9 2 92 ad asd lim asd as d asd\n asda
 
 	timeout2() {
 	    ( < in_file $1 "$2" "$3" "$4" "$5" "$6" &> /dev/null ) & pid=$!
-	    ( sleep 10 && kill -HUP $pid ) 2>/dev/null & watcher=$!
+	    ( sleep 12 && kill -HUP $pid ) 2>/dev/null & watcher=$!
 	    if wait $pid 2>/dev/null; then
 	        status="finished"
 	        pkill -HUP -P $watcher
@@ -91,7 +91,7 @@ echo -e "sgfefeqd qwdqwdddafasd s+64 65 30 9 2 92 ad asd lim asd as d asd\n asda
 
 	timeout2_1() {
 	    ( < in_file $1 "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9" &> /dev/null ) & pid=$!
-	    ( sleep 11 && kill -HUP $pid ) 2>/dev/null & watcher=$!
+	    ( sleep 12 && kill -HUP $pid ) 2>/dev/null & watcher=$!
 	    if wait $pid 2>/dev/null; then
 	        status="finished"
 	        pkill -HUP -P $watcher
@@ -185,7 +185,7 @@ echo -e "sgfefeqd qwdqwdddafasd s+64 65 30 9 2 92 ad asd lim asd as d asd\n asda
 	printf "${WHITE}\tsleep 9 | sleep 4                                               : ${RESET}"
 	SECONDS=0;
 	timeout2 "$1" here_doc lim2 "sleep 9" "sleep 4" "outfile"
-	if [ "$status" = "finished" ] && [ "$SECONDS" -eq "9" ]
+	if [ "$status" = "finished" ] && [ "$SECONDS" -ge "9" ] && [ "$SECONDS" -le "10" ]
 	    then
 	    echo -e "${GREEN}[OK]${RESET}\n"
 	else
@@ -211,7 +211,7 @@ echo -e "sgfefeqd qwdqwdddafasd s+64 65 30 9 2 92 ad asd lim asd as d asd\n asda
 	printf "${WHITE}\tsleep 1 | sleep | 7 | sleep 8 | sleep 4 | sleep 2               : ${RESET}"
 	SECONDS=0;
 	timeout2_1 "$1"  here_doc lim "sleep 1" "sleep 7" "sleep 8" "sleep 4" "sleep 2" "outfile"
-	if [ "$status" = "finished" ] && [ "$SECONDS" -eq "8" ]
+	if [ "$status" = "finished" ] && [ "$SECONDS" -ge "8" ] && [ "$SECONDS" -le "9" ]
 	    then
 	    echo -e "${GREEN}[OK]${RESET}\n"
 	else
@@ -223,7 +223,7 @@ echo -e "sgfefeqd qwdqwdddafasd s+64 65 30 9 2 92 ad asd lim asd as d asd\n asda
 	printf "${WHITE}\tsleep 9 | sleep 1 | sleep 3 | sleep 4 | sleep 5                 : ${RESET}"
 	SECONDS=0;
 	timeout2_1 "$1" here_doc lim "sleep 9" "sleep 1" "sleep 3" "sleep 4" "sleep 5" "outfile"
-	if [ "$status" = "finished" ] && [ "$SECONDS" -eq "9" ]
+	if [ "$status" = "finished" ] && [ "$SECONDS" -ge "9" ] && [ "$SECONDS" -le "10" ]
 	    then
 	    echo -e "${GREEN}[OK]${RESET}\n"
 	else

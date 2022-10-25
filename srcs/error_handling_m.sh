@@ -6,7 +6,7 @@
 #    By: nsmitsom <nsmitsom@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 14:44:56 by ael-bekk          #+#    #+#              #
-#    Updated: 2022/10/25 10:36:05 by nsmitsom         ###   ########.fr        #
+#    Updated: 2022/10/25 13:00:06 by nsmitsom         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ timeout() {
 
 timeout2() {
     ( $1 "$2" "$3" "$4" "$5" ) 2> my_error & pid=$!
-    ( sleep 10 && kill -HUP $pid ) 2>/dev/null & watcher=$!
+    ( sleep 12 && kill -HUP $pid ) 2>/dev/null & watcher=$!
     if wait $pid 2>/dev/null; then
         status_code=$?
         status="finished"
@@ -146,11 +146,11 @@ printf "${WHITE}\t< non_exist_input sleep 9 | sleep 4                           
 SECONDS=0;
 timeout2 "$1" "in_ffdgile" "sleep 9" "sleep 4" "outfile"
 find_smae_err=`cat my_error | grep -a "no such file or directory\|No such file or directory" | wc -l`
-if [ "$status" = "finished" ] && [ "$SECONDS" -eq "4" ] && [ "$find_smae_err" -eq "1" ]
+if [ "$status" = "finished" ] && [ "$SECONDS" -ge "4" ] && [ "$SECONDS" -le "5" ] && [ "$find_smae_err" -eq "1" ]
 then
     echo -e "${GREEN}[OK]${RESET}\n"
 else
-    echo -e "${RED}[KO]${RESET}\n"
+    echo -e "${RED}[KO]${RESET}\n" "$SECONDS"
 fi
 sleep 0.7
 
